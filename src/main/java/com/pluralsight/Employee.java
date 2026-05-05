@@ -6,6 +6,8 @@ public class Employee {
     private String department;
     private double payRate;
     private double hoursWorked;
+    public boolean isClockedIn;
+    public int clockInTime;
 
     public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
@@ -35,6 +37,22 @@ public class Employee {
         return this.hoursWorked;
     }
 
+    public int getClockInTime() {
+        return clockInTime;
+    }
+
+    public void setClockInTime(int clockInTime) {
+        this.clockInTime = clockInTime;
+    }
+
+    public boolean isClockedIn() {
+        return isClockedIn;
+    }
+
+    public void setClockedIn(boolean clockedIn) {
+        isClockedIn = clockedIn;
+    }
+
     public double getTotalPay() {
         return this.payRate * this.hoursWorked;
     }
@@ -55,13 +73,28 @@ public class Employee {
         return 0;
     }
 
-//    public double punchIn(int time) {
+    //int time = 10 for 10:00 am
+    //int time = 12 for 12:00 pm
+    //int time = 14 for 2:00 pm
+//    public void punchIn(int time) {
 //
 //    }
-//    public double punchOut(int time) {
+//
+//    public void punchOut(int time) {
 ////        When they punch out, we calculate how many hours they have worked and add that
 ////        time to their hours worked.
-////        int timeWorked = time - punchInTime;
-////        return this.hoursWorked += time;
+//
 //    }
+    public void punchTimeCard(int time) {
+        if (!isClockedIn) {
+            clockInTime = time;
+            isClockedIn = true;
+        } else if(isClockedIn) {
+            int hours = time - clockInTime;
+            hoursWorked += hours;
+
+            isClockedIn = false;
+        }
+
+    }
 }
