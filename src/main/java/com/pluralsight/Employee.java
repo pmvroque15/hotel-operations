@@ -7,23 +7,61 @@ public class Employee {
     private double payRate;
     private double hoursWorked;
 
+    public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.department = department;
+        this.payRate = payRate;
+        this.hoursWorked = hoursWorked;
+    }
+
+    public int getEmployeeId() {
+        return this.employeeId;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getDepartment() {
+        return this.department;
+    }
+
+    public double getPayRate() {
+        return this.payRate;
+    }
+
+    public double getHoursWorked() {
+        return this.hoursWorked;
+    }
+
     public double getTotalPay() {
-        return payRate * hoursWorked;
+        return this.payRate * this.hoursWorked;
     }
 
     public double getRegularHours() {
-        return 20.00;
+        if (hoursWorked <= 40) {
+            return hoursWorked;
+        }
+
+        return 40;
     }
 
     public double getOvertimeHours() {
-        double overtimeRate = payRate * 1.5;
-        double overtimeHours;
-        if (hoursWorked > 40) {
-            overtimeHours = hoursWorked - 40;
-        } else {
-            overtimeHours = 0;
-        }
 
-        return overtimeRate * overtimeHours;
+        if (this.hoursWorked > 40) {
+           return hoursWorked - 40;
+        }
+        return 0;
     }
+
+//    public double punchIn(int time) {
+//
+//    }
+//    public double punchOut(int time) {
+////        When they punch out, we calculate how many hours they have worked and add that
+////        time to their hours worked.
+////        int timeWorked = time - punchInTime;
+////        return this.hoursWorked += time;
+//    }
 }

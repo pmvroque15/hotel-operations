@@ -1,58 +1,69 @@
 package com.pluralsight;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
+
 public class Reservation {
     private String roomType;
     private double price;
     private int numberOfNights;
     private boolean isWeekend;
     private float reservationTotal;
+    public LocalDate reservationDate;
 
 
-    public void setRoomType(String roomType) {
+    public Reservation(String roomType, double price, int numberOfNights, boolean isWeekend, float reservationTotal, LocalDate reservationDate) {
         this.roomType = roomType;
+        this.price = price;
+        this.numberOfNights = numberOfNights;
+        this.isWeekend = isWeekend;
+        this.reservationTotal = reservationTotal;
+        this.reservationDate = reservationDate;
     }
 
-    public String getRoomType(){
+    public String getRoomType() {
         return roomType;
     }
 
-    public void setPrice() {
-        this.price = price;
-    }
 
-    public double getPrice(String roomType) {
-        price = 0;
-        if ("king".equalsIgnoreCase(roomType)) {
-            return 139.00;
-        } else {
-            return 124.00;
-        }
-    }
-
-    public void setNumberOfNights() {
-        this.numberOfNights = numberOfNights;
-    }
-
-    public int getNumberOfNights(int numberOfNights) {
+    public int getNumberOfNights() {
         return numberOfNights;
     }
 
-    public boolean isWeekend() {
-        return isWeekend;
-    }
 
-    public double setIsWeekend(boolean isWeekend) {
-        double currentPrice = 0;
-        if(isWeekend) {
-            currentPrice = price * 0.10;
-            currentPrice = currentPrice + price;
+    public double getPrice(String roomType) {
+        double basePrice = 124.00;
+
+        if ("king".equalsIgnoreCase(this.roomType)) {
+            basePrice = 139.00;
         }
 
-        return currentPrice;
+        if (isWeekend()) {
+            basePrice *= 1.10;
+        }
+
+        return basePrice;
+    }
+
+    public boolean isWeekend() {
+        DayOfWeek reservationDay = reservationDate.getDayOfWeek();
+
+        return reservationDay == DayOfWeek.SATURDAY || reservationDay == DayOfWeek.SUNDAY;
     }
 
     public double getReservationTotal() {
-        return reservationTotal;
+        return getPrice(this.roomType) * this.numberOfNights;
     }
+
+    public void setWeekend(boolean weekend) {
+        isWeekend = weekend;
+    }
+
+//    public double calculatePrice (String roomType) {
+//
+//
+//    }
+
 }
 
