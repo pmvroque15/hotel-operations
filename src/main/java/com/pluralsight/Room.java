@@ -57,10 +57,14 @@ public class Room {
         return false;
     }
 
-    public void cleanRoom() {
+    public String cleanRoom() {
         if (!isOccupied && isDirty) {
             isDirty = false;
+            return "All Clean!";
+        } else if (isOccupied && isDirty) {
+            return "Cannot be cleaned, occupied room.";
         }
+        return "What do you mean? Room is squeaky clean!";
     }
 
     public boolean isDirty() {
