@@ -104,13 +104,13 @@ public class Employee {
         return this.timeIn = timeIn;
     }
 
-    public void punchOut(int timeOut) {
+    public int punchOut(int timeOut) {
         if (timeOut < 0 || timeOut > 24) {
             System.out.println("Invalid Time");
-            return;
+            return 0;
         }
 
-        this.timeOut = timeOut;
+        return this.timeOut = timeOut;
     }
 //    public void punchTimeCard(int time) {
 //        if (!isClockedIn) {
