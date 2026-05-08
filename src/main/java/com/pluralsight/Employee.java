@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Employee {
     private int employeeId;
     private String name;
@@ -7,7 +10,8 @@ public class Employee {
     private double payRate;
     private double hoursWorked;
     public boolean isClockedIn;
-    public int clockInTime;
+    public int timeIn;
+    public int timeOut;
 
     public Employee(int employeeId, String name, String department, double payRate, double hoursWorked) {
         this.employeeId = employeeId;
@@ -17,33 +21,40 @@ public class Employee {
         this.hoursWorked = hoursWorked;
     }
 
+    public Employee() {
+
+    }
+
     public int getEmployeeId() {
-        return this.employeeId;
+        return employeeId;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public String getDepartment() {
-        return this.department;
+        return department;
     }
 
     public double getPayRate() {
-        return this.payRate;
+        return payRate;
     }
 
     public double getHoursWorked() {
-        return this.hoursWorked;
+        return hoursWorked;
     }
 
-    public int getClockInTime() {
-        return clockInTime;
-    }
+//    public int getClockInTime() {
+//        return clockInTime;
+//    }
 
-    public void setClockInTime(int clockInTime) {
-        this.clockInTime = clockInTime;
-    }
+//    public void setClockInTime(LocalTime clockInTime) {
+//        if (isClockedIn) {
+//            clockInTime = LocalTime.now();
+//        }
+//        this.clockInTime = clockInTime;
+//    }
 
     public boolean isClockedIn() {
         return isClockedIn;
@@ -68,33 +79,49 @@ public class Employee {
     public double getOvertimeHours() {
 
         if (this.hoursWorked > 40) {
-           return hoursWorked - 40;
+            return hoursWorked - 40;
         }
         return 0;
+    }
+
+    public int getTimeIn() {
+        return timeIn;
+    }
+
+    public int getTimeOut() {
+        return timeOut;
     }
 
     //int time = 10 for 10:00 am
     //int time = 12 for 12:00 pm
     //int time = 14 for 2:00 pm
-//    public void punchIn(int time) {
-//
-//    }
-//
-//    public void punchOut(int time) {
-////        When they punch out, we calculate how many hours they have worked and add that
-////        time to their hours worked.
-//
-//    }
-    public void punchTimeCard(int time) {
-        if (!isClockedIn) {
-            clockInTime = time;
-            isClockedIn = true;
-        } else if(isClockedIn) {
-            int hours = time - clockInTime;
-            hoursWorked += hours;
-
-            isClockedIn = false;
+    public int punchIn(int timeIn) {
+        if (timeIn < 0 || timeIn > 24) {
+            System.out.println("Invalid Time in input");
+            return 0;
         }
 
+        return this.timeIn = timeIn;
     }
+
+    public void punchOut(int timeOut) {
+        if (timeOut < 0 || timeOut > 24) {
+            System.out.println("Invalid Time");
+            return;
+        }
+
+        this.timeOut = timeOut;
+    }
+//    public void punchTimeCard(int time) {
+//        if (!isClockedIn) {
+//            clockInTime = time;
+//            isClockedIn = true;
+//        } else {
+//            int hours = time - clockInTime;
+//            hoursWorked += hours;
+//
+//            isClockedIn = false;
+//        }
+//    }
+
 }

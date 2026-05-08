@@ -9,17 +9,32 @@ public class Reservation {
     private double price;
     private int numberOfNights;
     private boolean isWeekend;
+
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setNumberOfNights(int numberOfNights) {
+        this.numberOfNights = numberOfNights;
+    }
+
+    public void setReservationTotal(float reservationTotal) {
+        this.reservationTotal = reservationTotal;
+    }
+
+    public void setReservationDate(LocalDate reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
     private float reservationTotal;
     public LocalDate reservationDate;
 
 
-    public Reservation(String roomType, double price, int numberOfNights, boolean isWeekend, float reservationTotal, LocalDate reservationDate) {
-        this.roomType = roomType;
-        this.price = price;
-        this.numberOfNights = numberOfNights;
-        this.isWeekend = isWeekend;
-        this.reservationTotal = reservationTotal;
-        this.reservationDate = reservationDate;
+    public Reservation() {
     }
 
     public String getRoomType() {
